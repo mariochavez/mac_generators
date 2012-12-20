@@ -1,0 +1,7 @@
+Description:
+    Will generate bootstrap setup with sass and coffee support
+
+Example:
+    rails generate bootstrap
+
+    This will create:

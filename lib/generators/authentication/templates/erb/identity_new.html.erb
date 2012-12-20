@@ -1,0 +1,24 @@
+<%%= form_for @<%= resource_name %>, url: <%= resource_name %>_path do |form| %>
+  <%% if @<%= resource_name %>.errors.any? %>
+    <h2>Form is invalid</h2>
+    <ul>
+      <%% for message in @<%= resource_name %>.errors.full_messages %>
+        <li><%%= message %>
+      <%% end %>
+    </ul>
+  <%% end %>
+
+  <p>
+    <%%= form.label :email %>
+    <%%= form.text_field :email %>
+  </p>
+  <p>
+    <%%= form.label :password %>
+    <%%= form.password_field :password %>
+  </p>
+  <p>
+    <%%= form.label :password_confirmation %>
+    <%%= form.password_field :password_confirmation %>
+  </p>
+  <p class='button'><%%= form.submit t('.create')%></p>
+<%% end %>

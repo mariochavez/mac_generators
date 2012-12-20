@@ -1,0 +1,8 @@
+Description:
+    Will generate files for Rails authentication
+
+Example:
+    rails generate authentication
+
+    This will create:
+        app/controllers/identity_controller.rb

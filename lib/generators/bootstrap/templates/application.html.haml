@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title <%= application_name %>
+    = stylesheet_link_tag    "<%= resource_name %>", media: "all"
+    = javascript_include_tag "<%= resource_name %>"
+    = csrf_meta_tags
+  %body
+    .container
+      = yield

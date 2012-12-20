@@ -62,6 +62,7 @@ PATH
   remote: .
   specs:
     mac_generators (0.0.1)
+      rails (~> 4.0.0.beta)
 
 GEM
   remote: http://rubygems.org/

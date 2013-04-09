@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    <%= resource_name %> = <%= resource_name.classify %>.new
   end
 
   def create

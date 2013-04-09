@@ -1,0 +1,39 @@
+Description:
+    Generates files for email/password authentication, based on Rails
+    has_secure_password functionality.
+    It uses warden with a single database authentication strategy.
+
+    By default without parameters all code will be generated for a model Identity
+    which will be used for authetication purposes.
+
+    If you want to generate authentication for another model than Identity then
+    pass it as a first parameter.
+
+    Also if you want signup and signin templates to be haml files pass the option
+    --haml, otherwise they will be erb.
+
+Example:
+    rails generate authentication:email
+
+    This will create:
+        app/controllers/identities_controller.rb
+        app/controllers/sessions_controller.rb
+        app/views/identities/new.html.erb
+        app/views/sessions/new.html.erb
+        app/models/identity.rb
+        config/initializers/warden.rb
+        lib/strategies/database_authentication.rb
+
+    And will modify:
+        app/controllers/application_controller.rb
+        config/locales/en.yml
+
+    And will add the following routes:
+        route  get 'sign_up' => 'identities#new', as: :sign_up
+        route  get 'log_in' => 'sessions#new', as: :log_in
+        route  get 'log_out' => 'sessions#destroy', as: :log_out
+        route  resource :identity, only: [:create, :new]
+        route  resource :sessions, only: [:create, :new]
+
+    And finally will add to Gemfile:
+        warden (~> 1.2.0)

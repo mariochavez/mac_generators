@@ -12,10 +12,7 @@ gemspec
 
 # Your gem is dependent on dev or edge Rails. Once you can lock this
 # dependency down to a specific version, move it to your gemspec.
-gem 'rails',     github: 'rails/rails'
-gem 'journey',   github: 'rails/journey'
-gem 'arel',      github: 'rails/arel'
-gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
+gem 'rails', '~> 4.0.0.beta'
 
 # To use debugger
 # gem 'debugger'

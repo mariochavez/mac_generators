@@ -20,4 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+    sessions:
+      new:
+        log_in: 'Log in'
+      create:
+        invalid_credentials: 'Your credentials are invalid'
+        logged_in: 'Welcome back!'
+      destroy:
+        logged_out: 'See you later!'
+    identities:
+      new:
+        create: 'Create identity'
+      create:
+        sign_up: 'Welcome to your new account!'
+
   hello: "Hello world"

@@ -1,3 +1,4 @@
+load File.expand_path("../../../lib/strategies/database_authentication.rb",  __FILE__)
 Rails.application.config.middleware.use Warden::Manager do |manager|
   manager.default_strategies :database_authentication
 

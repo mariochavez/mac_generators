@@ -14,4 +14,4 @@ module Strategies
   end
 end
 
-Warden::Strategies.add(:database_authenticatable, Strategies::DatabaseAuthentication)
+Warden::Strategies.add(:database_authentication, Strategies::DatabaseAuthentication)

@@ -66,25 +66,26 @@ protected
 
     def add_gems
       gem 'warden', '~> 1.2.0'
+      gem 'bcrypt-ruby'
     end
 
     def add_translations
       insert_into_file "config/locales/en.yml", after: 'en:' do
   <<-EOS
 
-    sessions:
-      new:
-        log_in: 'Log in'
-      create:
-        invalid_credentials: 'Your credentials are invalid'
-        logged_in: 'Welcome back!'
-      destroy:
-        logged_out: 'See you later!'
-    #{resource_pluralize}:
-      new:
-        create: 'Create #{resource_name}'
-      create:
-        sign_up: 'Welcome to your new account!'
+  sessions:
+    new:
+      log_in: 'Log in'
+    create:
+      invalid_credentials: 'Your credentials are invalid'
+      logged_in: 'Welcome back!'
+    destroy:
+      logged_out: 'See you later!'
+  #{resource_pluralize}:
+    new:
+      create: 'Create #{resource_name}'
+    create:
+      sign_up: 'Welcome to your new account!'
   EOS
       end
     end

@@ -115,6 +115,7 @@ describe Authentication::Generators::EmailGenerator do
 
     assert_file 'Gemfile' do |m|
       assert_match "gem \"warden\", \"~> 1.2.0\"", m
+      assert_match "gem \"bcrypt-ruby\"", m
     end
   end
 

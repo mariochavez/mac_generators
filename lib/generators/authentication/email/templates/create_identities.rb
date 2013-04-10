@@ -3,7 +3,7 @@ class Create<%= resource_pluralize.capitalize %> < ActiveRecord::Migration
     create_table :<%= resource_pluralize %> do |t|
       t.string :email
       t.string :password_hash
-      t.string :password_salt
+      t.string :password_digest
 
       t.timestamps
     end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mac_generators (0.0.1)
+    mac_generators (0.1.0)
       rails (~> 4.0.0.beta)
 
 GEM
@@ -46,6 +46,10 @@ GEM
     method_source (0.8.1)
     mime-types (1.22)
     minitest (4.7.0)
+    minitest-colorize (0.0.5)
+      minitest (>= 2.0)
+    minitest-focus (1.0.0)
+      minitest (~> 4.4)
     minitest-rails (0.9.1)
       minitest (~> 4.7)
       rails (>= 3.0)
@@ -101,7 +105,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  jdbc-sqlite3
   mac_generators!
+  minitest-colorize
+  minitest-focus
   minitest-rails
   pry-rails
   rails (~> 4.0.0.beta)

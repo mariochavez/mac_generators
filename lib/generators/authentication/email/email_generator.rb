@@ -103,6 +103,15 @@ protected
     end
 
     def instructions
+      message = "There are a few manual steps that you need to take care of\n\n"
+      message << "1. Run bundle command to install new gems.\n"
+      message << "2. Be sure that to have definition for root in your routes.\n"
+      message << "3. Run rake db:migrate to add your #{resource_pluralize} table.\n"
+      message << "4. Inspect warden initializer at config/initializers/warden.rb\n"
+      message << "   and update the failure_app if need it."
+      message << "5. Inspect generated files and learn how authentication was implemented.\n\n"
+
+      puts message
     end
 
     private

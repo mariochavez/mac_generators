@@ -11,14 +11,13 @@ Gem::Specification.new do |s|
   s.email       = 'mario.chavez@gmail.com'
   s.homepage    = "http://mario-chavez.decisionesinteligentes.com"
   s.summary     = "Custom generators."
-  s.description = "Includes 2 generators, the first one is to create a Rails authentication. The second on is to add bootstrap to a rails application"
+  s.description = "Includes 3 generators, the first two are to create a Rails authentication. The last one is to add bootstrap to a rails application"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.0.0.beta"
 
-  s.add_development_dependency "sqlite3"
   s.add_development_dependency "minitest-rails"
   s.add_development_dependency "minitest-focus"
   s.add_development_dependency "minitest-colorize"

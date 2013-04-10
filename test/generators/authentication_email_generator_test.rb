@@ -44,11 +44,11 @@ describe Authentication::Generators::EmailGenerator do
     run_generator
 
     assert_file 'app/views/identities/new.html.erb' do |m|
-      assert_match 'form_for @identity', m
+      assert_match 'form_for @identity, url: identity_path', m
     end
 
     assert_file 'app/views/sessions/new.html.erb' do |m|
-      assert_match 'form_tag sessions_path', m
+      assert_match 'form_for @identity, url: sessions_path', m
     end
   end
 
@@ -56,11 +56,11 @@ describe Authentication::Generators::EmailGenerator do
     run_generator ['--haml']
 
     assert_file 'app/views/identities/new.html.haml' do |m|
-      assert_match 'form_for @identity', m
+      assert_match 'form_for @identity, url: identity_path', m
     end
 
     assert_file 'app/views/sessions/new.html.haml' do |m|
-      assert_match 'form_tag sessions_path', m
+      assert_match 'form_for @identity, url: sessions_path', m
     end
   end
 
@@ -70,7 +70,7 @@ describe Authentication::Generators::EmailGenerator do
     assert_file 'config/routes.rb' do |m|
       assert_match "get 'sign_up' => 'identities#new'", m
       assert_match "get 'log_in' => 'sessions#new'", m
-      assert_match "get 'log_out' => 'sessions#destroy'", m
+      assert_match "delete 'log_out' => 'sessions#destroy'", m
 
       assert_match "resource :identity, only: [:create, :new]", m
       assert_match "resource :sessions, only: [:create, :new]", m
@@ -90,7 +90,7 @@ describe Authentication::Generators::EmailGenerator do
       assert_match 'create_table :identities', m
       assert_match 't.string :email', m
       assert_match 't.string :password_hash', m
-      assert_match 't.string :password_salt', m
+      assert_match 't.string :password_digest', m
     end
 
     assert_file 'app/models/identity.rb' do |m|

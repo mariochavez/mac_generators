@@ -1,0 +1,32 @@
+Description:
+    Generates files for oauth authentication using omniauth.
+    It uses warden with a single oauth authentication strategy.
+
+    By default without parameters all code will be generated for a model Identity
+    which will be used for authetication purposes.
+
+    If you want to generate authentication for another model than Identity then
+    pass it as a first parameter.
+
+Example:
+    rails generate authentication:omniauth
+
+    This will create:
+        app/controllers/sessions_controller.rb
+        app/models/identity.rb
+        config/initializers/warden.rb
+        config/initializers/omniauth.rb
+        config/initializers/authentication_domain.rb
+        lib/strategies/oauth_authentication.rb
+
+    And will modify:
+        app/controllers/application_controller.rb
+        config/locales/en.yml
+
+    And will add the following routes:
+        route  get 'auth/:provider/callback' => 'sessions#create', as: :log_in
+        route  delete '/sessions/destroy' => 'sessions#destroy', as: :log_out
+
+    And finally will add to Gemfile:
+        warden (~> 1.2.0)
+        omniauth

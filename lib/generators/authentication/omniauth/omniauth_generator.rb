@@ -1,32 +1,16 @@
 module Authentication
   module Generators
-    class EmailGenerator < Rails::Generators::Base
+    class OmniauthGenerator < Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
       argument :resource_name, :type => :string, :default => 'identity'
-      class_option :haml, type: :boolean, default: false, description: 'Generate haml templates'
 
       def copy_controller_files
-        template 'identities_controller.rb', File.join('app/controllers', "#{resource_pluralize}_controller.rb")
         template 'sessions_controller.rb', 'app/controllers/sessions_controller.rb'
       end
 
-      def copy_view_files
-        if options[:haml]
-          template 'haml/identity_new.html.haml', "app/views/#{resource_pluralize}/new.html.haml"
-          template 'haml/session_new.html.haml', "app/views/sessions/new.html.haml"
-        else
-          template 'erb/identity_new.html.erb', "app/views/#{resource_pluralize}/new.html.erb"
-          template 'erb/session_new.html.erb', "app/views/sessions/new.html.erb"
-        end
-      end
-
       def add_routes
-        route "get 'sign_up' => '#{resource_pluralize}#new', as: :sign_up"
-        route "get 'log_in' => 'sessions#new', as: :log_in"
-        route "delete 'log_out' => 'sessions#destroy', as: :log_out"
-
-        route "resource :#{resource_name}, only: [:create, :new]"
-        route "resource :sessions, only: [:create, :new]"
+        route "get 'auth/:provider/callback' => 'sessions#create', as: :log_in"
+        route "delete '/sessions/destroy' => 'sessions#destroy', as: :log_out"
       end
 
       def generate_user
@@ -70,7 +54,7 @@ protected
 
     def add_gems
       gem 'warden', '~> 1.2.0'
-      gem 'bcrypt-ruby'
+      gem 'omniauth'
     end
 
     def add_translations
@@ -81,15 +65,10 @@ protected
     new:
       log_in: 'Log in'
     create:
-      invalid_credentials: 'Your credentials are invalid'
+      unauthorized_domain: 'Sorry but your domain is not authorized'
       logged_in: 'Welcome back!'
     destroy:
       logged_out: 'See you later!'
-  #{resource_pluralize}:
-    new:
-      create: 'Create #{resource_name}'
-    create:
-      sign_up: 'Welcome to your new account!'
   EOS
       end
     end
@@ -98,18 +77,32 @@ protected
       template 'warden.rb', File.join('config', 'initializers', 'warden.rb')
     end
 
+    def copy_configuration
+      template 'authentication_domain.rb', File.join('config', 'initializers', 'authentication_domain.rb')
+    end
+
+    def copy_omniauth_configuration
+      template 'omniauth.rb', File.join('config', 'initializers', 'omniauth.rb')
+    end
+
     def copy_warden_strategies
-      template 'database_authentication.rb', File.join('lib', 'strategies', 'database_authentication.rb')
+      template 'oauth_authentication.rb', File.join('lib', 'strategies', 'oauth_authentication.rb')
     end
 
     def instructions
       message = "There are a few manual steps that you need to take care of\n\n"
-      message << "1. Run bundle command to install new gems.\n"
-      message << "2. Be sure that to have definition for root in your routes.\n"
-      message << "3. Run rake db:migrate to add your #{resource_pluralize} table.\n"
-      message << "4. Inspect warden initializer at config/initializers/warden.rb\n"
-      message << "   and update the failure_app if need it.\n"
-      message << "5. Inspect generated files and learn how authentication was implemented.\n\n"
+      message << "1. Add an omniauth provider gem like twitter, facebook, etc..\n"
+      message << "2. Modify config/initializers/omniauth.rb and setup your provider\n"
+      message << "   and your provider credentials.\n"
+      message << "3. Run bundle command to install new gems.\n"
+      message << "4. If you want to restrict access to a specific email domain.\n"
+      message << "   modify config/initializers/authentication_domain.rb and add \n"
+      message << "   your allowed domain.\n"
+      message << "5. Inspect warden initializer at config/initializers/warden.rb\n"
+      message << "   and update the failure_app.\n"
+      message << "6. Be sure that to have definition for root in your routes.\n"
+      message << "7. Run rake db:migrate to add your #{resource_pluralize} table.\n"
+      message << "8. Inspect generated files and learn how authentication was implemented.\n\n"
 
       puts message
     end

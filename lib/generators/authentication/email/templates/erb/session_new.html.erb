@@ -1,14 +1,15 @@
-<%%- if flash.alert %>
-  <div class='alert'><%%= flash.alert %></div>
-<%% end %>
-<%%= form_tag sessions_path do %>
+<%%= form_for @<%= resource_name %>, url: sessions_path do |form| %>
+  <%%- if warden_message %>
+    <div class='alert'><%%= warden_message %></div>
+  <%% end %>
+
   <p>
-    <%%= label_tag :email %><br />
-    <%%= text_field_tag :email, params[:email] %>
+    <%%= form.label :email %><br />
+    <%%= form.text_field :email %>
   </p>
   <p>
-    <%%= label_tag :password %><br />
-    <%%= password_field_tag :password, params[:password] %>
+    <%%= form.label :password %><br />
+    <%%= form.password_field :password %>
   </p>
-  <p class='button'><%%= submit_tag t('.log_in') %></p>
+  <p class='button'><%%= form.submit t('.log_in') %></p>
 <%% end %>

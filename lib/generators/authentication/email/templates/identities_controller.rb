@@ -8,7 +8,7 @@ class <%= resource_pluralize.capitalize %>Controller < ApplicationController
     @<%= resource_name %> = <%= resource_name.classify %>.new <%= resource_name %>_params
 
     if @<%= resource_name %>.save
-      warden.set_user(<%= resource_name %>, scope: :<%=resource_name %>_id)
+      warden.set_user(@<%= resource_name %>, scope: :<%=resource_name %>)
       redirect_to root_url, notice: t('.sign_up')
     else
       render :new

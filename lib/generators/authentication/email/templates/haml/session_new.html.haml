@@ -1,14 +1,15 @@
-- if flash.alert
-  .alert
-    = flash.alert
-= form_tag sessions_path do
+= form_for @<%= resource_name %>, url: sessions_path do |form|
+  - if warden_message
+    .alert
+      = warden_message
+
   %p
-    = label_tag :email
+    = form.label :email
     %br/
-    = text_field_tag :email, params[:email]
+    = form.text_field :email
   %p
-    = label_tag :password
+    = form.label :password
     %br/
-    = password_field_tag :password, params[:password]
+    = form.password_field :password
   %p.button
-    = submit_tag t('.log_in')
+    = form.submit t('.log_in')

@@ -8,8 +8,7 @@ module Strategies
       <%= resource_name %> = <%= resource_name.classify %>.find_by_email(params['<%= resource_name %>']['email']).try(:authenticate, params['<%= resource_name %>']['password'])
 
       return success! <%= resource_name %> if <%= resource_name %>
-      fail! I18n.t('login_errors.message')
-
+      fail! I18n.t('sessions.create.invalid_credentials')
     end
   end
 end

@@ -23,7 +23,7 @@ module Authentication
       def add_routes
         route "get 'sign_up' => '#{resource_pluralize}#new', as: :sign_up"
         route "get 'log_in' => 'sessions#new', as: :log_in"
-        route "get 'log_out' => 'sessions#destroy', as: :log_out"
+        route "delete 'log_out' => 'sessions#destroy', as: :log_out"
 
         route "resource :#{resource_name}, only: [:create, :new]"
         route "resource :sessions, only: [:create, :new]"
@@ -41,7 +41,7 @@ module Authentication
     <<-EOS
 
 
-  helper_method :current_#{resource_name}, :#{resource_name}_signed_in?
+  helper_method :current_#{resource_name}, :#{resource_name}_signed_in?, :warden_message
 
 protected
   def current_#{resource_name}
@@ -54,6 +54,10 @@ protected
 
   def authenticate!
     redirect_to root_path, notice: t('.not_logged') unless #{resource_name}_signed_in?
+  end
+
+  def warden_message
+    warden.message
   end
 
   def warden

@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.0.0.beta"
+  s.add_dependency "rails", "~> 4.1.0"
 
   s.add_development_dependency "minitest-rails"
   s.add_development_dependency "minitest-focus"
-  s.add_development_dependency "minitest-colorize"
+  #s.add_development_dependency "minitest-colorize"
   s.add_development_dependency "pry-rails"
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class <%= resource_pluralize.capitalize %>Controller < ApplicationController
 
   def new
@@ -15,9 +17,9 @@ class <%= resource_pluralize.capitalize %>Controller < ApplicationController
     end
   end
 
-private
+  private
+
   def <%= resource_name %>_params
     params.require(:<%= resource_name %>).permit :email, :password, :password_confirmation
   end
-
 end

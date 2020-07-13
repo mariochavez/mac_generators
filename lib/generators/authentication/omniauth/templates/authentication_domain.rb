@@ -1,1 +1,1 @@
-Rails.application.config.authentication_domain = ''
+Rails.application.config.authentication_domain = ""

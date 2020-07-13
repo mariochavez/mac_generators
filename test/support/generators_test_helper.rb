@@ -5,7 +5,7 @@ module GeneratorsTestHelper
       setup :prepare_destination
 
       begin
-        base.tests Rails::Generators.const_get(base.name.sub(/Test$/, ''))
+        base.tests Rails::Generators.const_get(base.name.sub(/Test$/, ""))
       rescue
       end
     end
@@ -26,14 +26,14 @@ module GeneratorsTestHelper
 
   def copy_application_controller
     controller = File.expand_path("../../fixtures/application_controller.rb", __FILE__)
-    destination = File.join(destination_root, 'app', 'controllers')
+    destination = File.join(destination_root, "app", "controllers")
 
     copy_file controller, destination
   end
 
   def copy_locales
     controller = File.expand_path("../../fixtures/en.yml", __FILE__)
-    destination = File.join(destination_root, 'config', 'locales')
+    destination = File.join(destination_root, "config", "locales")
 
     copy_file controller, destination
   end
@@ -44,7 +44,7 @@ module GeneratorsTestHelper
   end
 
   def make_migrations_dir
-    destination = File.join(destination_root, 'db', 'migrate')
+    destination = File.join(destination_root, "db", "migrate")
 
     FileUtils.mkdir_p(destination)
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class <%= resource_name.classify %> < ActiveRecord::Base
   has_secure_password validations: true
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def new
     @<%= resource_name %> = <%= resource_name.classify %>.new

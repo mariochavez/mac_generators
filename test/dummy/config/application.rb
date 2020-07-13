@@ -1,6 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path("../boot", __FILE__)
 
-require 'rails/all'
+require "rails/all"
 
 Bundler.require(*Rails.groups)
 require "mac_generators"
@@ -26,7 +26,6 @@ module Dummy
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets.
-    config.assets.version = '1.0'
+    config.assets.version = "1.0"
   end
 end
-

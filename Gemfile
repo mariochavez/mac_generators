@@ -12,7 +12,6 @@ gemspec
 
 # Your gem is dependent on dev or edge Rails. Once you can lock this
 # dependency down to a specific version, move it to your gemspec.
-gem 'rails', '~> 4.2.0'
+gem "rails", "~> 6.0.0"
 
-gem 'sqlite3', :platform => [:ruby, :mswin, :mingw]
-gem 'jdbc-sqlite3', :platform => :jruby
+gem "sqlite3", platform: [:ruby, :mswin, :mingw]
